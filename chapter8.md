@@ -16,29 +16,21 @@ int main(int argc, char *argv[])
     void filecopy(FILE *, FILE *);
     char *prog = argv[0];
 
-    if (argc == 1)
-    {
+    if (argc == 1) {
         filecopy(stdin, stdout);
-    }
-    else
-    {
-        while (--argc > 0)
-        {
-            if ((fp = fopen(*++argv, "r")) == NULL)
-            {
+    } else {
+        while (--argc > 0) {
+            if ((fp = fopen(*++argv, "r")) == NULL) {
                 fprintf(stderr, "%s: can't open %s\n", prog, *argv);
                 exit(1);
-            }
-            else
-            {
+            } else {
                 filecopy(fp, stdout);
                 fclose(fp);
             }
         }
     }
 
-    if (ferror(stdout))
-    {
+    if (ferror(stdout)) {
         fprintf(stderr, "%s: error writing stdout\n", prog);
         exit(2);
     }
@@ -49,8 +41,7 @@ int main(int argc, char *argv[])
 void filecopy(FILE *ifp, FILE *ofp)
 {
     int c;
-    while ((c = getc(ifp)) != EOF)
-    {
+    while ((c = getc(ifp)) != EOF) {
         putc(c, ofp);
     }
 }
@@ -74,21 +65,14 @@ int main(int argc, char *argv[])
 {
     int fd;
 
-    if (argc == 1)
-    {
+    if (argc == 1) {
         filecopy(0, 1);
-    }
-    else
-    {
-        while (--argc > 0)
-        {
-            if ((fd = open(*++argv, O_RDONLY, 0)) < 0)
-            {
+    } else {
+        while (--argc > 0) {
+            if ((fd = open(*++argv, O_RDONLY, 0)) < 0) {
                 error("cat: can't open %s\n", *argv);
                 exit(1);
-            }
-            else
-            {
+            } else {
                 filecopy(fd, 1);
                 close(fd);
             }
@@ -103,10 +87,8 @@ void filecopy(int ifd, int ofd)
 {
     char buf[2048];
     int n;
-    while ((n = read(ifd, buf, sizeof(buf))) > 0)
-    {
-        if(write(ofd, buf, n) != n)
-        {
+    while ((n = read(ifd, buf, sizeof(buf))) > 0) {
+        if(write(ofd, buf, n) != n) {
             error("cat: write error");
         }
     }

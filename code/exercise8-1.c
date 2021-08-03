@@ -11,21 +11,14 @@ int main(int argc, char *argv[])
 {
     int fd;
 
-    if (argc == 1)
-    {
+    if (argc == 1) {
         filecopy(0, 1);
-    }
-    else
-    {
-        while (--argc > 0)
-        {
-            if ((fd = open(*++argv, O_RDONLY, 0)) < 0)
-            {
+    } else {
+        while (--argc > 0) {
+            if ((fd = open(*++argv, O_RDONLY, 0)) < 0) {
                 error("cat: can't open %s\n", *argv);
                 exit(1);
-            }
-            else
-            {
+            } else {
                 filecopy(fd, 1);
                 close(fd);
             }
@@ -40,10 +33,8 @@ void filecopy(int ifd, int ofd)
 {
     char buf[2048];
     int n;
-    while ((n = read(ifd, buf, sizeof(buf))) > 0)
-    {
-        if(write(ofd, buf, n) != n)
-        {
+    while ((n = read(ifd, buf, sizeof(buf))) > 0) {
+        if(write(ofd, buf, n) != n) {
             error("cat: write error");
         }
     }
