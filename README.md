@@ -1,2 +1,4 @@
-### The C Programming Language (Second Edition) K&R
+### The C Programming Language (Second Edition)
+
+aka. K&R
 
